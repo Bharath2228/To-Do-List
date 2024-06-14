@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 
 function ToDoList(){
-
     
     const [tasks, setTasks] = useState([]);
     const [newTask, setNewTask] = useState()
@@ -19,19 +18,19 @@ function ToDoList(){
     }
 
     function moveUp(index){
-       const updatedTask = [...tasks]
-       
+
        if (index > 0){
-        [[updatedTask[index]], [updatedTask[index - 1]]] = [updatedTask[index - 1], updatedTask[index]]
+        const updatedTask = [...tasks];
+        [updatedTask[index], updatedTask[index - 1]] = [updatedTask[index - 1], updatedTask[index]]
         setTasks(updatedTask);
        }
     }
 
     function moveDown(index){
-        const updatedTask = [...tasks]
-        
-        if (index < updatedTask.length){
-         [[updatedTask[index]], [updatedTask[index + 1]]] = [updatedTask[index + 1], updatedTask[index]]
+
+        if (index < tasks.length - 1){
+        const updatedTask = [...tasks];
+         [updatedTask[index], updatedTask[index + 1]] = [updatedTask[index + 1], updatedTask[index]]
          setTasks(updatedTask);
         }
      }
@@ -80,13 +79,10 @@ function ToDoList(){
                            ❌
                         </button>
                         </li>
-                    </>
-                    
+                    </>   
                 )}
             </ol>
         </div>
-
-        
     );
 
 }
