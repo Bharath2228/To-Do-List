@@ -5,15 +5,18 @@ function ToDoList() {
     const [newTask, setNewTask] = useState("");
 
     useEffect(() => {
-        const json = localStorage.getItem("tasks");
+        const json = localStorage.getItem("task");
         const loadedTasks = JSON.parse(json);
-        if (loadedTasks) {
+        if(loadedTasks) {
             setTasks(loadedTasks);
         }
     }, []);
 
     useEffect(() => {
-        localStorage.setItem("tasks", JSON.stringify(tasks));
+        if(tasks.length > 0) {
+            const json = JSON.stringify(tasks);
+            localStorage.setItem("task", json);
+        }
     }, [tasks]);
 
     function addTask() {
@@ -83,7 +86,7 @@ function ToDoList() {
         if (task.completed) {
             task.completed = !task.completed;
             updatedTasks.splice(index, 1);
-            let firstUncompletedIndex = updatedTasks.findIndex(task => task.completed);
+            let firstUncompletedIndex = updatedTasks.findIndex(task => !task.completed);
             if (firstUncompletedIndex === -1) {
                 firstUncompletedIndex = updatedTasks.length;
             }
@@ -132,7 +135,7 @@ function ToDoList() {
                         className={`taskItem ${task.completed ? 'completed' : ''}`}
                     >
                         <input
-                            id='checkbox'
+                            id={`checkbox-${index}`}
                             type='checkbox'
                             onChange={() => toggleStrikeThrough(index)}
                             checked={task.completed}
