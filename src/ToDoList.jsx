@@ -13,9 +13,11 @@ function ToDoList() {
     }, []);
 
     useEffect(() => {
-        if(tasks.length > 0) {
+        if (tasks.length > 0) {
             const json = JSON.stringify(tasks);
             localStorage.setItem("task", json);
+        } else {
+            localStorage.removeItem("task");
         }
     }, [tasks]);
 
@@ -115,6 +117,13 @@ function ToDoList() {
         }
     }
 
+    function onEditInput(event, index, task){
+        if(event.key === 'Enter'){
+            event.preventDefault()
+            saveTask(index, task);
+        }
+    }
+
     return (
         <div className='toDoListContainer'>
             <h1>To Do List</h1>
@@ -147,6 +156,7 @@ function ToDoList() {
                             type='checkbox'
                             onChange={() => toggleStrikeThrough(index)}
                             checked={task.completed}
+                            
                         />
                         {task.editing ? (
                             <>
@@ -154,6 +164,7 @@ function ToDoList() {
                                     type='text'
                                     value={task.text}
                                     onChange={(e) => handleTaskTextChange(index, e.target.value)}
+                                    onKeyDown={(e) => onEditInput(e, index, task.text)}
                                 />
                                 <button
                                     className='saveButton'
