@@ -2,14 +2,16 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100vh;
   background-color: #f0f0f0;
+  margin: 0; /* Remove default margin */
+  height: 100vh; /* Use full viewport height */
 }
 
 .toDoListContainer {
   text-align: center;
   font-family: Arial, Helvetica, sans-serif;
-  width: 600px;
+  width: 90%; /* Adjusted width to 90% */
+  max-width: 600px; /* Maximum width of 600px */
   background-color: #fff;
   padding: 20px;
   border-radius: 10px;
@@ -50,6 +52,7 @@ input[type="text"] {
   color: hsla(0, 0%, 0%, 0.8);
   width: 70%;
   margin-right: 10px;
+  max-width: 100%; /* Ensure it doesn't overflow on small screens */
 }
 
 ol {
@@ -133,7 +136,43 @@ li {
   text-decoration: line-through;
 }
 
-.inputDiv{
+.inputDiv {
   display: flex;
   align-items: center;
+}
+
+/* Media Query for smaller screens */
+@media (max-width: 768px) {
+  .toDoListContainer {
+    padding: 15px;
+  }
+
+  h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+  }
+
+  button {
+    font-size: 1.5rem;
+    padding: 8px 16px;
+  }
+
+  input[type="text"] {
+    font-size: 1.4rem;
+    padding: 8px;
+  }
+
+  li {
+    font-size: 1.4rem;
+    padding: 12px;
+  }
+
+  .deleteButton,
+  .moveButton,
+  .editButton,
+  .cancelButton,
+  .saveButton {
+    padding: 6px 10px;
+    font-size: 1.2rem;
+  }
 }

@@ -63,6 +63,14 @@ function ToDoList() {
         });
     }
 
+    function handleTaskTextChange(index, newText) {
+        setTasks(prevTasks => {
+            const updatedTasks = [...prevTasks];
+            updatedTasks[index] = { ...updatedTasks[index], text: newText };
+            return updatedTasks;
+        });
+    }
+
     function saveTask(index, newText) {
         setTasks(prevTasks => {
             const updatedTasks = [...prevTasks];
@@ -145,10 +153,10 @@ function ToDoList() {
                                 <input
                                     type='text'
                                     value={task.text}
-                                    onChange={(e) => saveTask(index, e.target.value)}
+                                    onChange={(e) => handleTaskTextChange(index, e.target.value)}
                                 />
                                 <button
-                                    className='editButton'
+                                    className='saveButton'
                                     onClick={() => saveTask(index, task.text)}
                                 >
                                     Save
@@ -171,24 +179,28 @@ function ToDoList() {
                                 </button>
                             </>
                         )}
-                        <button
-                            className='moveButton'
-                            onClick={() => moveUp(index)}
-                        >
-                            ⬆️
-                        </button>
-                        <button
-                            className='moveButton'
-                            onClick={() => moveDown(index)}
-                        >
-                            ⬇️
-                        </button>
-                        <button
-                            className='deleteButton'
-                            onClick={() => removeTask(index)}
-                        >
-                            ❌
-                        </button>
+                        {!task.editing && (
+                            <>
+                                <button
+                                    className='moveButton'
+                                    onClick={() => moveUp(index)}
+                                >
+                                    ⬆️
+                                </button>
+                                <button
+                                    className='moveButton'
+                                    onClick={() => moveDown(index)}
+                                >
+                                    ⬇️
+                                </button>
+                                <button
+                                    className='deleteButton'
+                                    onClick={() => removeTask(index)}
+                                >
+                                    ❌
+                                </button>
+                            </>
+                        )}
                     </li>
                 ))}
             </ol>
