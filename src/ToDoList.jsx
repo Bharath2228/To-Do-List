@@ -135,7 +135,7 @@ function ToDoList() {
                         className={`taskItem ${task.completed ? 'completed' : ''}`}
                     >
                         <input
-                            id={`checkbox-${index}`}
+                            className='checkbox'
                             type='checkbox'
                             onChange={() => toggleStrikeThrough(index)}
                             checked={task.completed}
