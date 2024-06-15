@@ -7,43 +7,44 @@ function ToDoList() {
     useEffect(() => {
         const json = localStorage.getItem("tasks");
         const loadedTasks = JSON.parse(json);
-        if(loadedTasks) {
+        if (loadedTasks) {
             setTasks(loadedTasks);
         }
     }, []);
 
     useEffect(() => {
-        if(tasks.length > 0) {
-            const json = JSON.stringify(tasks);
-            localStorage.setItem("tasks", json);
-        }
+        localStorage.setItem("tasks", JSON.stringify(tasks));
     }, [tasks]);
 
     function addTask() {
         if (newTask.trim() !== "") {
-            const addedTask = { text: newTask, completed: false, editing: false};
-            setTasks(t => [...t, addedTask]);
+            const addedTask = { text: newTask, completed: false, editing: false };
+            setTasks(prevTasks => [addedTask, ...prevTasks]);
             setNewTask("");
         }
     }
 
     function removeTask(index) {
-        setTasks(tasks.filter((_, i) => i !== index));
+        setTasks(prevTasks => prevTasks.filter((_, i) => i !== index));
     }
 
     function moveUp(index) {
         if (index > 0) {
-            const updatedTasks = [...tasks];
-            [updatedTasks[index], updatedTasks[index - 1]] = [updatedTasks[index - 1], updatedTasks[index]];
-            setTasks(updatedTasks);
+            setTasks(prevTasks => {
+                const updatedTasks = [...prevTasks];
+                [updatedTasks[index], updatedTasks[index - 1]] = [updatedTasks[index - 1], updatedTasks[index]];
+                return updatedTasks;
+            });
         }
     }
 
     function moveDown(index) {
         if (index < tasks.length - 1) {
-            const updatedTasks = [...tasks];
-            [updatedTasks[index], updatedTasks[index + 1]] = [updatedTasks[index + 1], updatedTasks[index]];
-            setTasks(updatedTasks);
+            setTasks(prevTasks => {
+                const updatedTasks = [...prevTasks];
+                [updatedTasks[index], updatedTasks[index + 1]] = [updatedTasks[index + 1], updatedTasks[index]];
+                return updatedTasks;
+            });
         }
     }
 
@@ -52,27 +53,33 @@ function ToDoList() {
     }
 
     function editTask(index) {
-        const updatedTasks = [...tasks];
-        updatedTasks[index] = { ...updatedTasks[index], editing: true };
-        setTasks(updatedTasks);
+        setTasks(prevTasks => {
+            const updatedTasks = [...prevTasks];
+            updatedTasks[index] = { ...updatedTasks[index], editing: true };
+            return updatedTasks;
+        });
     }
 
     function saveTask(index, newText) {
-        const updatedTasks = [...tasks];
-        updatedTasks[index] = { ...updatedTasks[index], text: newText, editing: false };
-        setTasks(updatedTasks);
+        setTasks(prevTasks => {
+            const updatedTasks = [...prevTasks];
+            updatedTasks[index] = { ...updatedTasks[index], text: newText, editing: false };
+            return updatedTasks;
+        });
     }
 
     function cancelEdit(index) {
-        const updatedTasks = [...tasks];
-        updatedTasks[index] = { ...updatedTasks[index], editing: false};
-        setTasks(updatedTasks);
+        setTasks(prevTasks => {
+            const updatedTasks = [...prevTasks];
+            updatedTasks[index] = { ...updatedTasks[index], editing: false };
+            return updatedTasks;
+        });
     }
 
     function toggleStrikeThrough(index) {
         const updatedTasks = [...tasks];
         const task = updatedTasks[index];
-
+    
         if (task.completed) {
             task.completed = !task.completed;
             updatedTasks.splice(index, 1);
@@ -86,7 +93,7 @@ function ToDoList() {
             task.completed = !task.completed;
             updatedTasks.push(task);
         }
-
+    
         setTasks(updatedTasks);
     }
 
@@ -117,7 +124,6 @@ function ToDoList() {
                     Add Task
                 </button>
             </div>
-            
 
             <ol className='taskList'>
                 {tasks.map((task, index) => (
@@ -136,12 +142,7 @@ function ToDoList() {
                                 <input
                                     type='text'
                                     value={task.text}
-                                    onChange={(e) => {
-                                        const newText = e.target.value;
-                                        const updatedTasks = [...tasks];
-                                        updatedTasks[index] = { ...updatedTasks[index], text: newText };
-                                        setTasks(updatedTasks);
-                                    }}
+                                    onChange={(e) => saveTask(index, e.target.value)}
                                 />
                                 <button
                                     className='editButton'
@@ -179,7 +180,12 @@ function ToDoList() {
                         >
                             ⬇️
                         </button>
-                        <button className='deleteButton' onClick={() => removeTask(index)}>❌</button>
+                        <button
+                            className='deleteButton'
+                            onClick={() => removeTask(index)}
+                        >
+                            ❌
+                        </button>
                     </li>
                 ))}
             </ol>
