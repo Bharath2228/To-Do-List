@@ -7,7 +7,7 @@ function ToDoList() {
     useEffect(() => {
         const json = localStorage.getItem("task");
         const loadedTasks = JSON.parse(json);
-        if(loadedTasks) {
+        if (loadedTasks) {
             setTasks(loadedTasks);
         }
     }, []);
@@ -92,7 +92,7 @@ function ToDoList() {
     function toggleStrikeThrough(index) {
         const updatedTasks = [...tasks];
         const task = updatedTasks[index];
-    
+
         if (task.completed) {
             task.completed = !task.completed;
             updatedTasks.splice(index, 1);
@@ -106,7 +106,7 @@ function ToDoList() {
             task.completed = !task.completed;
             updatedTasks.push(task);
         }
-    
+
         setTasks(updatedTasks);
     }
 
@@ -117,9 +117,9 @@ function ToDoList() {
         }
     }
 
-    function onEditInput(event, index, task){
-        if(event.key === 'Enter'){
-            event.preventDefault()
+    function onEditInput(event, index, task) {
+        if (event.key === 'Enter') {
+            event.preventDefault();
             saveTask(index, task);
         }
     }
@@ -141,78 +141,61 @@ function ToDoList() {
                     className='addButton'
                     onClick={addTask}
                 >
-                    Add Task
+                    Add
                 </button>
             </div>
 
             <ol className='taskList'>
                 {tasks.map((task, index) => (
-                    <li
-                        key={index}
-                        className={`taskItem ${task.completed ? 'completed' : ''}`}
-                    >
-                        <input
-                            className='checkbox'
-                            type='checkbox'
-                            onChange={() => toggleStrikeThrough(index)}
-                            checked={task.completed}
-                            
-                        />
-                        {task.editing ? (
-                            <>
-                                <input
-                                    type='text'
-                                    value={task.text}
-                                    onChange={(e) => handleTaskTextChange(index, e.target.value)}
-                                    onKeyDown={(e) => onEditInput(e, index, task.text)}
-                                />
-                                <button
-                                    className='saveButton'
-                                    onClick={() => saveTask(index, task.text)}
-                                >
-                                    Save
-                                </button>
-                                <button
-                                    className='cancelButton'
-                                    onClick={() => cancelEdit(index)}
-                                >
-                                    Cancel
-                                </button>
-                            </>
-                        ) : (
-                            <>
-                                <span className={`listText ${task.completed ? 'strikethrough' : ''}`}>{task.text}</span>
-                                <button
-                                    className='editButton'
-                                    onClick={() => editTask(index)}
-                                >
-                                    Edit
-                                </button>
-                            </>
-                        )}
-                        {!task.editing && (
-                            <>
-                                <button
-                                    className='moveButton'
-                                    onClick={() => moveUp(index)}
-                                >
-                                    ⬆️
-                                </button>
-                                <button
-                                    className='moveButton'
-                                    onClick={() => moveDown(index)}
-                                >
-                                    ⬇️
-                                </button>
-                                <button
-                                    className='deleteButton'
-                                    onClick={() => removeTask(index)}
-                                >
-                                    ❌
-                                </button>
-                            </>
-                        )}
-                    </li>
+                    <React.Fragment key={index}>
+                        <li className={`taskItem ${task.completed ? 'completed' : ''}`}>
+                            <input
+                                className='checkbox'
+                                type='checkbox'
+                                onChange={() => toggleStrikeThrough(index)}
+                                checked={task.completed}
+                            />
+                            {task.editing ? (
+                                <>
+                                    <input
+                                        type='text'
+                                        value={task.text}
+                                        onChange={(e) => handleTaskTextChange(index, e.target.value)}
+                                        onKeyDown={(e) => onEditInput(e, index, task.text)}
+                                    />
+                                    <button className='saveButton' onClick={() => saveTask(index, task.text)}>
+                                        Save
+                                    </button>
+                                    <button className='cancelButton' onClick={() => cancelEdit(index)}>
+                                        Cancel
+                                    </button>
+                                </>
+                            ) : (
+                                <span className={`listText ${task.completed ? 'strikethrough' : ''}`}>
+                                    {task.text}
+                                </span>
+                            )}
+                        </li>
+                        <div className='taskButtons'>
+                            {!task.editing && (
+                                <>
+                                
+                                    <button className='editButton' onClick={() => editTask(index)}>
+                                        Edit
+                                    </button>
+                                    <button className='moveButton' onClick={() => moveUp(index)}>
+                                        ⬆️
+                                    </button>
+                                    <button className='moveButton' onClick={() => moveDown(index)}>
+                                        ⬇️
+                                    </button>
+                                    <button className='deleteButton' onClick={() => removeTask(index)}>
+                                        ❌
+                                    </button>
+                                </>
+                            )}
+                        </div>
+                    </React.Fragment>
                 ))}
             </ol>
         </div>

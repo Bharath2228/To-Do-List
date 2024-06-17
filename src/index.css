@@ -2,43 +2,48 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #f0f0f0;
   margin: 0;
   height: fit-content;
+  background-image: url('./assets/Background1.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 .toDoListContainer {
+  backdrop-filter: blur(20px);
+  width: 100%;
+  max-width: 700px;
   text-align: center;
-  font-family: Arial, Helvetica, sans-serif;
-  width: 90%; 
-  max-width: 600px;
-  background-color: #fff;
-  padding: 20px;
+  font-family: monospace;
+  background-color: rgba(255, 255, 255, 0.169); 
+  padding: 30px;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   margin: 20px auto;
 }
 
 h1 {
-  font-size: 4rem;
-  margin-bottom: 30px;
+  font-size: 3.5rem;
+  margin-top: 10px;
+  margin-bottom: 20px;
 }
 
 button {
-  font-size: 1.7rem;
+  font-size: 1.5rem;
   font-weight: bold;
-  padding: 10px 20px;
-  color: white;
+  padding: 12px 24px;
+  color: hsla(0, 0%, 0%, 0.779);
   border: none;
-  border-radius: 5px;
+  border-radius: 10px;
   cursor: pointer;
   transition: background-color 0.3s ease;
   white-space: nowrap; 
 }
 
 .addButton {
-  background-color: hsl(120, 100%, 54%);
-  margin-left: 10px;
+  background-color: #fff;
+  font-weight: bold;
+  padding: 7px 18px;
 }
 
 .addButton:hover {
@@ -46,15 +51,14 @@ button {
 }
 
 input[type="text"] {
-  font-size: 1.6rem;
-  padding: 10px;
+  font-size: 1.3rem;
+  padding: 12px;
   border: 2px solid grey;
-  border-radius: 5px;
+  border-radius: 10px;
   color: hsla(0, 0%, 0%, 0.8);
   width: 70%;
   margin-right: 10px;
   max-width: 100%;
-  
 }
 
 ol {
@@ -65,19 +69,49 @@ ol {
 li {
   display: flex;
   align-items: center;
-  font-size: 1.6rem;
+  font-size: 1.5rem;
   font-weight: bold;
-  padding: 15px;
+  padding: 20px;
   background-color: white;
   margin-bottom: 10px;
-  border: 3px solid grey;
+  border: 3px solid rgba(128, 128, 128, 0.187);
   border-radius: 5px;
 }
 
 .listText {
+  font-size: 1.5rem;
   flex: 1;
   text-align: left;
   overflow: auto;
+  white-space: nowrap;
+}
+
+.taskContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.taskButtons {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 8px;
+}
+
+.taskItem {
+  padding: 5px;
+  border-radius: 10px;
+}
+
+.taskList {
+  background-color: hsla(108, 52%, 74%, 0.808);
+  border: none;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.taskList:empty {
+  display: none;
 }
 
 .deleteButton,
@@ -85,29 +119,16 @@ li {
 .editButton,
 .cancelButton,
 .saveButton {
-  padding: 8px 12px;
-  font-size: 1.4rem;
+  padding: 7px 12px;
+  font-size: 1.2rem;
   margin-left: 10px;
 }
 
-.deleteButton {
-  background-color: #ff6347;
-}
-
-.deleteButton:hover {
-  background-color: #e74c3c;
-}
-
-.moveButton {
-  background-color: #3498db;
-}
-
-.moveButton:hover {
-  background-color: #2980b9;
-}
-
 .editButton {
-  background-color: #f39c12;
+  text-align: justify;
+  padding: 5px 10px;
+  margin: 0;
+  color: black;
 }
 
 .editButton:hover {
@@ -145,9 +166,22 @@ li {
   margin-bottom: 20px;
 }
 
+@media (max-width: 1100px){
+  body{
+    height: 100vh;
+    background-size: cover;
+  }
+}
 @media (max-width: 768px) {
+
+  body {
+    align-items: baseline;
+    margin-top: 20px;
+    background-size: cover;
+  }
+
   .toDoListContainer {
-    width: 95%; 
+    width: fit-content;
     padding: 15px;
   }
 
@@ -157,12 +191,12 @@ li {
   }
 
   button {
-    font-size: 1.5rem;
+    font-size: 1rem;
     padding: 8px 16px;
   }
 
   input[type="text"] {
-    font-size: 1.4rem;
+    font-size: 1rem;
     padding: 8px;
     outline: none;
     overflow: auto;
@@ -178,7 +212,14 @@ li {
   .editButton,
   .cancelButton,
   .saveButton {
-    padding: 6px 10px;
-    font-size: 1.2rem;
+    padding: 4px 8px;
+    font-size: 1rem;
+  }
+
+  .saveButton,
+  .cancelButton {
+    margin: 2px;
+    padding: 4px 8px;
+    font-size: 0.8rem;
   }
 }
