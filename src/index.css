@@ -4,6 +4,7 @@ body {
   align-items: center;
   margin: 0;
   height: fit-content;
+  background-color: rgba(0, 0, 0, 0.728);
   background-image: url('./assets/Background1.jpg');
   background-size: cover;
   background-repeat: no-repeat;
@@ -12,13 +13,13 @@ body {
 .toDoListContainer {
   backdrop-filter: blur(20px);
   width: 100%;
-  max-width: 700px;
+  max-width: 800px;
   text-align: center;
   font-family: monospace;
   background-color: rgba(255, 255, 255, 0.169); 
   padding: 30px;
   border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 1px 1px 5px;
   margin: 20px auto;
 }
 
@@ -26,6 +27,12 @@ h1 {
   font-size: 3.5rem;
   margin-top: 10px;
   margin-bottom: 20px;
+}
+
+#inputField{
+  font-size: 1.5rem;
+  padding: 10px 15px;
+  outline: none;
 }
 
 button {
@@ -41,19 +48,19 @@ button {
 }
 
 .addButton {
-  background-color: #fff;
   font-weight: bold;
-  padding: 7px 18px;
+  padding: 5px 15px;
+  font-size: 1.4rem;
 }
 
 .addButton:hover {
-  background-color: hsl(120, 100%, 44%);
+  background-color: #e1d7cf5b;
 }
 
 input[type="text"] {
-  font-size: 1.3rem;
+  font-size: 1.5rem;
   padding: 12px;
-  border: 2px solid grey;
+  border: none;
   border-radius: 10px;
   color: hsla(0, 0%, 0%, 0.8);
   width: 70%;
@@ -95,19 +102,51 @@ li {
 .taskButtons {
   display: flex;
   justify-content: flex-end;
-  margin-bottom: 8px;
+  margin-top: 12px;
+  margin-bottom: 12px;
+}
+
+.hidden{
+  display: none;
+}
+
+.dueDate{
+  background-color: #fff;
+  margin-right: 10px;
+  border: none;
+  border-radius: 10px;
+  font-weight: bold;
+}
+
+.dueDate input{
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  background: transparent;
+  font-weight: bold;
+  text-align: center;
+  padding: 10px;
+}
+
+.dateButton{
+  font-size: 1rem;
+  padding: 10px;
+  margin-right: 10px;
 }
 
 .taskItem {
-  padding: 5px;
+  padding: 5px 10px;
+  border: none;
   border-radius: 10px;
+  font-weight: lighter;
 }
 
 .taskList {
-  background-color: hsla(108, 52%, 74%, 0.808);
+  background-color: hsla(0, 0%, 100%, 0.16);
   border: none;
   border-radius: 10px;
   padding: 10px;
+  box-shadow: 1px 1px 5px black;
 }
 
 .taskList:empty {
@@ -119,8 +158,8 @@ li {
 .editButton,
 .cancelButton,
 .saveButton {
-  padding: 7px 12px;
-  font-size: 1.2rem;
+  padding: 4px 8px;
+  font-size: 1rem;
   margin-left: 10px;
 }
 
@@ -128,27 +167,30 @@ li {
   text-align: justify;
   padding: 5px 10px;
   margin: 0;
-  color: black;
+}
+
+.dateButton:hover{
+  background-color: #e1d7cf5b;
+}
+
+.deleteButton:hover{
+  background-color: #e1d7cf5b;
+}
+
+.moveButton:hover{
+  background-color: #e1d7cf5b;
 }
 
 .editButton:hover {
-  background-color: #e67e22;
-}
-
-.cancelButton {
-  background-color: #95a5a6;
+  background-color: #e1d7cf5b;
 }
 
 .cancelButton:hover {
-  background-color: #7f8c8d;
-}
-
-.saveButton {
-  background-color: #2ecc71;
+  background-color: #e1d7cffa;
 }
 
 .saveButton:hover {
-  background-color: #27ae60;
+  background-color: #e1d7cffa;
 }
 
 .checkbox {
@@ -166,28 +208,50 @@ li {
   margin-bottom: 20px;
 }
 
-@media (max-width: 1100px){
-  body{
-    height: 100vh;
-    background-size: cover;
-  }
-}
-@media (max-width: 768px) {
-
+@media (max-width: 1100px) {
   body {
-    align-items: baseline;
-    margin-top: 20px;
-    background-size: cover;
+    height: auto;
+    padding: 20px;
   }
 
   .toDoListContainer {
-    width: fit-content;
-    padding: 15px;
+    padding: 20px;
   }
 
   h1 {
-    font-size: 3rem;
-    margin-bottom: 20px;
+    font-size: 2rem;
+  }
+
+  button {
+    font-size: 1.2rem;
+    padding: 10px 20px;
+  }
+
+  input[type="text"] {
+    font-size: 1rem;
+    padding: 10px;
+  }
+
+  li {
+    font-size: 1.2rem;
+    padding: 15px;
+  }
+}
+
+@media (max-width: 768px) {
+  body {
+    align-items: flex-start;
+    height: auto;
+    padding: 20px;
+  }
+
+  .toDoListContainer {
+    width: 95%;
+    padding: 20px;
+  }
+
+  h1 {
+    font-size: 1.8rem;
   }
 
   button {
@@ -196,14 +260,14 @@ li {
   }
 
   input[type="text"] {
-    font-size: 1rem;
+    font-size: 1.5rem;
     padding: 8px;
-    outline: none;
-    overflow: auto;
+    width: 60%;
+    margin-right: 5px;
   }
 
   li {
-    font-size: 1.4rem;
+    font-size: 1.5rem;
     padding: 12px;
   }
 
@@ -212,14 +276,113 @@ li {
   .editButton,
   .cancelButton,
   .saveButton {
-    padding: 4px 8px;
-    font-size: 1rem;
+    font-size: 0.9rem;
+    padding: 6px 10px;
   }
 
   .saveButton,
   .cancelButton {
     margin: 2px;
-    padding: 4px 8px;
-    font-size: 0.8rem;
   }
 }
+
+@media (max-width: 550px) {
+  body {
+    background-color:hsla(0, 0%, 0%, 0.701);
+    flex-direction: column;
+    align-items: center;
+    padding: 0;
+    background-size: cover;
+  }
+
+  .toDoListContainer {
+    width: 90%;
+    padding: 15px;
+    margin-top: 30px;
+  }
+
+  h1 {
+    font-size: 1.8;
+    margin-bottom: 10px;
+  }
+
+  button {
+    font-size: 0.8rem;
+    padding: 6px 12px;
+  }
+
+  input[type="text"] {
+    font-size: 0.8rem;
+    padding: 6px;
+    width: calc(100% - 70px);
+    margin-right: 5px;
+  }
+
+  li {
+    font-size: 0.9rem;
+    padding: 10px;
+  }
+
+  .deleteButton,
+  .moveButton,
+  .editButton,
+  .cancelButton,
+  .saveButton {
+    font-size: 0.8rem;
+    padding: 4px 8px;
+  }
+
+  .saveButton,
+  .cancelButton {
+    padding: 3px 6px;
+  }
+}
+
+/* @media (max-width: 400px) {
+
+  body{
+    justify-content: center;
+  }
+
+  .toDoListContainer {
+    width: 100%;
+    padding: 10px;
+    margin: 0;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+  }
+
+  button {
+    font-size: 0.7rem;
+    padding: 5px 10px;
+  }
+
+  input[type="text"] {
+    font-size: 0.7rem;
+    padding: 5px;
+    width: calc(100% - 60px);
+    margin-right: 5px;
+  }
+
+  li {
+    font-size: 0.8rem;
+    padding: 8px;
+  }
+
+  .deleteButton,
+  .moveButton,
+  .editButton,
+  .cancelButton,
+  .saveButton {
+    font-size: 0.7rem;
+    padding: 3px 5px;
+  }
+
+  .saveButton,
+  .cancelButton {
+    padding: 2px 4px;
+  }
+} */

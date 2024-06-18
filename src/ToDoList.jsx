@@ -23,7 +23,7 @@ function ToDoList() {
 
     function addTask() {
         if (newTask.trim() !== "") {
-            const addedTask = { text: newTask, completed: false, editing: false };
+            const addedTask = { text: newTask, completed: false, editing: false, dueDate: '', showDueDateInput: false };
             setTasks(prevTasks => [addedTask, ...prevTasks]);
             setNewTask("");
         }
@@ -124,6 +124,22 @@ function ToDoList() {
         }
     }
 
+    function handleDueDateChange(index, newDate) {
+        setTasks(prevTasks => {
+            const updatedTasks = [...prevTasks];
+            updatedTasks[index] = { ...updatedTasks[index], dueDate: newDate };
+            return updatedTasks;
+        });
+    }
+
+    function toggleDueDateInput(index) {
+        setTasks(prevTasks => {
+            const updatedTasks = [...prevTasks];
+            updatedTasks[index] = { ...updatedTasks[index], showDueDateInput: !updatedTasks[index].showDueDateInput };
+            return updatedTasks;
+        });
+    }
+
     return (
         <div className='toDoListContainer'>
             <h1>To Do List</h1>
@@ -176,10 +192,23 @@ function ToDoList() {
                                 </span>
                             )}
                         </li>
-                        <div className='taskButtons'>
+                        <div className={`taskButtons ${task.completed ? 'hidden' : ''}`}>   
+                            
+                            <button className='dateButton' onClick={() => toggleDueDateInput(index)}>
+                                Due
+                            </button>
+                            {task.showDueDateInput && (
+                                <div className="dueDate">
+                                     <input
+                                        type='date'
+                                        value={task.dueDate}
+                                        onChange={(e) => handleDueDateChange(index, e.target.value)}
+                                    />
+                                </div>
+                                   
+                            )}
                             {!task.editing && (
                                 <>
-                                
                                     <button className='editButton' onClick={() => editTask(index)}>
                                         Edit
                                     </button>
