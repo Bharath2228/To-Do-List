@@ -193,9 +193,9 @@ function ToDoList() {
                             )}
                         </li>
                         <div className={`taskButtons ${task.completed ? 'hidden' : ''}`}>   
-                            
+                            <div className='due'>
                             <button className='dateButton' onClick={() => toggleDueDateInput(index)}>
-                                Due
+                             <i class="fa-regular fa-calendar-days"></i>
                             </button>
                             {task.showDueDateInput && (
                                 <div className="dueDate">
@@ -207,21 +207,23 @@ function ToDoList() {
                                 </div>
                                    
                             )}
+                            </div>
+                            
                             {!task.editing && (
-                                <>
+                                <div className='editButtons'>
                                     <button className='editButton' onClick={() => editTask(index)}>
-                                        Edit
+                                    <i class="fa-solid fa-pen-to-square"></i>
                                     </button>
                                     <button className='moveButton' onClick={() => moveUp(index)}>
-                                        ⬆️
+                                    <i class="fa-solid fa-up-long"></i>
                                     </button>
                                     <button className='moveButton' onClick={() => moveDown(index)}>
-                                        ⬇️
+                                    <i class="fa-solid fa-down-long"></i>
                                     </button>
                                     <button className='deleteButton' onClick={() => removeTask(index)}>
-                                        ❌
+                                    <i class="fa-solid fa-trash"></i>
                                     </button>
-                                </>
+                                </div>
                             )}
                         </div>
                     </React.Fragment>
