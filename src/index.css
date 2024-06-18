@@ -4,10 +4,12 @@ body {
   align-items: center;
   margin: 0;
   height: f100vh;
-  background-color: rgba(0, 0, 0, 0.728);
-  background-image: url('./assets/Background1.jpg');
+  background-color: rgba(30, 27, 27, 0.966);
+  background-image: url('./assets/Background3.jpg');
   background-size: cover;
+  background-position: center;
   background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
 #root{
@@ -19,8 +21,8 @@ body {
   width: 100%;
   max-width: 700px;
   text-align: center;
-  font-family: monospace;
-  background-color: rgba(255, 255, 255, 0.169); 
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  background-color: rgba(59, 56, 56, 0.142); 
   padding: 30px;
   border-radius: 10px;
   box-shadow: 1px 1px 5px;
@@ -33,9 +35,14 @@ body {
 }
 
 h1 {
+  font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
   font-size: 3.5rem;
+  font-weight: lighter;
   margin-top: 10px;
   margin-bottom: 20px;
+  color: rgb(0, 255, 255);
+  text-shadow: 4px 4px 10px black;
+
 }
 
 #inputField{
@@ -47,6 +54,7 @@ h1 {
 
 #inputField input{
   padding: 0;
+
 }
 
 button {
@@ -80,6 +88,7 @@ input[type="text"] {
   width: 70%;
   margin-right: 10px;
   max-width: 100%;
+  background-color: hsl(0, 0%, 100%);
 }
 
 ol {
@@ -271,16 +280,18 @@ li {
 
   }
   .addButton{
-    padding: 2px 3px;
+    padding: 2px 8px;
+    font-size: 0.8rem;
   }
 
   #inputField{
     font-size: 1rem;
-    padding: 5px;
+    padding: 8px;
   }
 
   .taskList{
     width: 97%;
+    padding: 5px;
     padding: 5px;
   }
 
@@ -290,7 +301,8 @@ li {
   }
 
   .listText{
-    font-size: 1rem;
+    font-size: 1.3rem;
+    padding: 5px 0;
   }
 
   .taskButtons{
@@ -302,8 +314,12 @@ li {
   .editButton,
   .moveButton,
   .deleteButton{
-    font-size: 0.8em;
+    font-size: 1em;
     padding: 2px 5px;
+  }
+
+  .dateButton{
+    padding: 2px 8px;
   }
 
   .dueDate input{
@@ -313,12 +329,22 @@ li {
   }
 
   .checkbox{
-    transform: scale(0.8);
-    margin-right: 4px;
+    transform: scale(1);
+    margin: 0 5px;
   }
 
-  input[type="date"]::-webkit-calendar-picker-indicator {
-    
-    padding-top: 2px;
-}
+  .taskItem input[type="text"]{
+    font-size: 1.3rem;
+    font-family: monospace;
+  }
+
+  .cancelButton{
+    margin-left: 4px;
+    margin-right: 5px;
+    font-size: 0.8rem;
+  }
+
+  .saveButton{
+    font-size: 0.8rem;
+  }
 }
