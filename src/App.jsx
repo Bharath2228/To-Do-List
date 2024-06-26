@@ -17,7 +17,6 @@ function App() {
           }
 
           const data = await response.json();
-          console.log(data)
           setBackground(data.urls.full)
           document.body.style.background = `url(${data.urls.full}) no-repeat center center fixed`;
           document.body.style.backgroundSize = 'cover';
@@ -27,7 +26,7 @@ function App() {
       };
 
       fetchImage();
-  }, [])
+  }, [accessKey])
 
   return(
     <>
